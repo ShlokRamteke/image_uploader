@@ -1,11 +1,18 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
+require("./db/conn");
+const router = require("./routes/router");
+const cors = require("cors");
+
 const port = 8005;
 
-app.get("/", (req, res) => {
-  res.send("server start");
-});
+app.use(express.json());
+app.use(cors());
+app.use(router);
+
+app.use("/uploads", express.static("./uploads"));
 
 app.listen(port, () => {
-  console.log(`server started at port: ${port}`);
+  console.log(`server start at port no ${port}`);
 });

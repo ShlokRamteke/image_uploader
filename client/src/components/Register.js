@@ -6,17 +6,21 @@ import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [fname, setFName] = useState("");
+
   const [file, setFile] = useState("");
 
   const history = useNavigate();
 
   const setdata = (e) => {
-    setFName(e.target.value);
+    const { value } = e.target;
+    setFName(value);
   };
 
   const setimgfile = (e) => {
     setFile(e.target.files[0]);
   };
+
+  // adduser data
 
   const addUserData = async (e) => {
     e.preventDefault();
@@ -32,11 +36,12 @@ const Register = () => {
     };
 
     const res = await axios.post("/register", formData, config);
+    console.log(res)
 
-    if (res.data.status === 201) {
-      history("/");
+    if (res.data.status === 401 || !res.data) {
+      console.log("errror");
     } else {
-      console.log("error");
+      history("/");
     }
   };
 
@@ -45,15 +50,25 @@ const Register = () => {
       <div className="container mt-3">
         <h1>Upload Your Img Here</h1>
 
-        <Form>
+        <Form className="mt-3">
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>UserName</Form.Label>
-            <Form.Control type="text" name="fname" onChange={setdata} />
+            <Form.Control
+              type="text"
+              name="fname"
+              onChange={setdata}
+              placeholder=""
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Select Your Image</Form.Label>
-            <Form.Control type="file" name="photo" onChange={setimgfile} />
+            <Form.Control
+              type="file"
+              onChange={setimgfile}
+              name="photo"
+              placeholder=""
+            />
           </Form.Group>
           <Button variant="primary" type="submit" onClick={addUserData}>
             Submit

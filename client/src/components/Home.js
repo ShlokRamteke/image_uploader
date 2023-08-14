@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
-import { NavLink } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import moment from "moment";
 import Alert from "react-bootstrap/Alert";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  // console.log(data)
 
   const [show, setShow] = useState(false);
 
@@ -18,34 +19,31 @@ const Home = () => {
       },
     });
 
-    if (res.data.status === 201) {
-      console.log("data get");
-      setData(res.data.data);
+    if (res.data.status === 401 || !res.data) {
+      console.log("errror");
     } else {
-      console.log("error");
+      setData(res.data.getUser);
     }
   };
 
   const dltUser = async (id) => {
-    console.log(id);
     const res = await axios.delete(`/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    if (res.data.status === 201) {
+    if (res.data.status === 401 || !res.data) {
+      console.log("errror");
+    } else {
       getUserData();
       setShow(true);
-    } else {
-      console.log("error");
     }
   };
 
   useEffect(() => {
     getUserData();
   }, []);
-
   return (
     <>
       {show ? (
@@ -56,20 +54,16 @@ const Home = () => {
         ""
       )}
       <div className="container mt-2">
-        <h1 className="text-center mt-2">
-          Image Uploader with SQL
-        </h1>
-
+        <h1 className="text-center mt-2">MERN Image Upload Projects</h1>
         <div className="text-end">
           <Button variant="primary">
             <NavLink to="/register" className="text-decoration-none text-light">
-              {" "}
               Add User
             </NavLink>
           </Button>
         </div>
 
-        <div className="d-flex justify-content-between align-iteams-center mt-5">
+        <div className="row d-flex justify-content-between align-iteams-center mt-5">
           {data.length > 0
             ? data.map((el, i) => {
                 return (
@@ -80,23 +74,23 @@ const Home = () => {
                     >
                       <Card.Img
                         variant="top"
-                        src={`/uploads/${el.usersimg}`}
                         style={{
                           width: "100px",
                           textAlign: "center",
                           margin: "auto",
                         }}
+                        src={`/uploads/${el.imgpath}`}
                         className="mt-2"
                       />
                       <Card.Body className="text-center">
-                        <Card.Title>UserName : {el.username}</Card.Title>
+                        <Card.Title>User Name : {el.fname}</Card.Title>
                         <Card.Text>
-                          Date Added : {moment(el.date).format("DD-MM-YYYY")}
+                          Date Added :{moment(el.date).format("L")}
                         </Card.Text>
                         <Button
                           variant="danger"
-                          onClick={() => dltUser(el.id)}
                           className="col-lg-6 text-center"
+                          onClick={() => dltUser(el._id)}
                         >
                           Delete
                         </Button>
