@@ -54,7 +54,7 @@ const Home = () => {
         ""
       )}
       <div className="container mt-2">
-        <h1 className="text-center mt-2">MERN Image Upload Projects</h1>
+        <h1 className="text-center mt-2 text-success">MERN Image Upload Projects</h1>
         <div className="text-end">
           <Button variant="primary">
             <NavLink to="/register" className="text-decoration-none text-light">
@@ -69,6 +69,7 @@ const Home = () => {
                 return (
                   <>
                     <Card
+                      border="dark"
                       style={{ width: "22rem", height: "18rem" }}
                       className="mb-3"
                     >
@@ -88,7 +89,7 @@ const Home = () => {
                           Date Added :{moment(el.date).format("L")}
                         </Card.Text>
                         <Button
-                          variant="danger"
+                          variant="outline-danger"
                           className="col-lg-6 text-center"
                           onClick={() => dltUser(el._id)}
                         >

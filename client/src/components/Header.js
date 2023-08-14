@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
+      <Navbar bg="primary" variant="dark" style={{ height: "60px" }}>
         <Container>
           <NavLink to="/" className="text-decoration-none text-light mx-2">
             Home
