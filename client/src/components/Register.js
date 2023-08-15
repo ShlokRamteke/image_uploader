@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { addUserDataAPI } from "../services/apis";
 
 const Register = () => {
   const [fname, setFName] = useState("");
@@ -35,13 +35,17 @@ const Register = () => {
       },
     };
 
-    const res = await axios.post("/register", formData, config);
-    console.log(res)
+    try {
+      const res = await addUserDataAPI(formData, config);
+      //console.log(res);
 
-    if (res.data.status === 401 || !res.data) {
-      console.log("errror");
-    } else {
-      history("/");
+      if (res.data.status === 401 || !res.data) {
+        console.log("errror");
+      } else {
+        history("/");
+      }
+    } catch (error) {
+      console.log("error", error);
     }
   };
 

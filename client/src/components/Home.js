@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 import moment from "moment";
 import Alert from "react-bootstrap/Alert";
+import { getUserDataAPI, deletfuncAPI } from "../services/apis";
+
+const  BASE_URL=process.env.REACT_APP_BASE_URLS;
+
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -13,31 +16,37 @@ const Home = () => {
   const [show, setShow] = useState(false);
 
   const getUserData = async () => {
-    const res = await axios.get("/getdata", {
-      headers: {
+    try {
+      const res = await getUserDataAPI({
         "Content-Type": "application/json",
-      },
-    });
+      });
 
-    if (res.data.status === 401 || !res.data) {
-      console.log("errror");
-    } else {
-      setData(res.data.getUser);
+      if (res.data.status === 401 || !res.data) {
+        console.log("errror");
+      } else {
+        setData(res.data.getUser);
+      }
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
   const dltUser = async (id) => {
-    const res = await axios.delete(`/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await deletfuncAPI(id, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    if (res.data.status === 401 || !res.data) {
-      console.log("errror");
-    } else {
-      getUserData();
-      setShow(true);
+      if (res.data.status === 401 || !res.data) {
+        console.log("errror");
+      } else {
+        getUserData();
+        setShow(true);
+      }
+    } catch (error) {
+      console.log("error", error);
     }
   };
 
@@ -54,7 +63,9 @@ const Home = () => {
         ""
       )}
       <div className="container mt-2">
-        <h1 className="text-center mt-2 text-success">MERN Image Upload Projects</h1>
+        <h1 className="text-center mt-2 text-success">
+          MERN Image Upload Projects
+        </h1>
         <div className="text-end">
           <Button variant="primary">
             <NavLink to="/register" className="text-decoration-none text-light">
@@ -80,7 +91,7 @@ const Home = () => {
                           textAlign: "center",
                           margin: "auto",
                         }}
-                        src={`/uploads/${el.imgpath}`}
+                        src={`${BASE_URL}/uploads/${el.imgpath}`}
                         className="mt-2"
                       />
                       <Card.Body className="text-center">
