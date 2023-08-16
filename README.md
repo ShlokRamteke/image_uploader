@@ -9,7 +9,6 @@ This repository contains a full-stack project developed using React for the clie
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [API Calls](#api-calls)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Introduction
@@ -34,12 +33,12 @@ The application is built using React and Node.js, with MangoDB as the database f
 - `app.js`: Entry point for the server-side code, initializing Express, middleware, and routing.
 - `router.js`: Defines API routes, handles user registration, data retrieval, and deletion.
 - `db/conn.js`: Establishes MAngoDB database connection using environment variables.
-- `model/userSchema` : establish the scheme for the data uploaded to the database
+- `model/userSchema.js`: establish the scheme for the data uploaded to the database
 
 ## Getting Started
 1. Clone this repository.
 2. Install dependencies for both the client and server using `npm install` in their respective directories.
-3. Create a `.env` file in the server directory with MySQL connection details.
+3. Create a `.env` file in the server directory with MangoDB connection details.
 4. Start the server by running `npm start` in the server directory.
 5. Start the React development server by running `npm start` in the client directory.
 6. Access the application at `http://localhost:3000` in your web browser.
@@ -51,9 +50,6 @@ The application is built using React and Node.js, with MangoDB as the database f
 
 ## API Calls
 The application uses common API request functions stored in the `apicall.js` and `apis.js` files. These files provide a streamlined approach to making HTTP requests to the server-side API.
-
-## Contributing
-Contributions are welcome! Feel free to fork this repository, make changes, and submit pull requests. Please follow best practices for clean code, thorough documentation, and clear commit messages.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
