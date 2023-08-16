@@ -21,7 +21,7 @@ This full-stack application combines the power of React and Node.js to create a 
 - Modern and responsive UI
 
 ## Architecture
-The application is built using React and Node.js, with MangoDB as the database for storing user data and images. It employs Axios for handling HTTP requests, `react-bootstrap` for UI components, and the `multer` library for handling image uploads.
+The application is built using React and Node.js, with MongoDB as the database for storing user data and images. It employs Axios for handling HTTP requests, `react-bootstrap` for UI components, and the `multer` library for handling image uploads.
 
 ### Client-Side (React)
 - `App.js`: Main entry point for the React application, handling routing and rendering components.
@@ -32,13 +32,13 @@ The application is built using React and Node.js, with MangoDB as the database f
 ### Server-Side (Node.js)
 - `app.js`: Entry point for the server-side code, initializing Express, middleware, and routing.
 - `router.js`: Defines API routes, handles user registration, data retrieval, and deletion.
-- `db/conn.js`: Establishes MAngoDB database connection using environment variables.
+- `db/conn.js`: Establishes MongoDB database connection using environment variables.
 - `model/userSchema.js`: establish the scheme for the data uploaded to the database
 
 ## Getting Started
 1. Clone this repository.
 2. Install dependencies for both the client and server using `npm install` in their respective directories.
-3. Create a `.env` file in the server directory with MangoDB connection details.
+3. Create a `.env` file in the server directory with MongoDB connection details.
 4. Start the server by running `npm start` in the server directory.
 5. Start the React development server by running `npm start` in the client directory.
 6. Access the application at `http://localhost:3000` in your web browser.
