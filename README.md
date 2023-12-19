@@ -2,7 +2,7 @@
 
 This repository contains a full-stack project developed using React for the client-side and Node.js for the server-side. The project allows users to register, upload images, view registered user data, and delete user records.
 
-Link: https://movie-bookingsite-clone.netlify.app/
+Link: https://imageuploadsite.netlify.app/
 
 ## Table of Contents
 - [Introduction](#introduction)
